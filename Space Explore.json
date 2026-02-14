@@ -1,0 +1,244 @@
+{
+  "name": "Space Explore",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "af53988d-27ee-479b-a28d-3b6276496d46",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -448,
+        -128
+      ],
+      "id": "e8e3b283-8172-48ab-a702-7dcd347bc97d",
+      "name": "Webhook",
+      "webhookId": "af53988d-27ee-479b-a28d-3b6276496d46"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1P8Z73tcG7t8jjga_Ibodb-NW2kMaQ58qqISsPLhae_o",
+          "mode": "list",
+          "cachedResultName": "Space Exploration ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1P8Z73tcG7t8jjga_Ibodb-NW2kMaQ58qqISsPLhae_o/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1P8Z73tcG7t8jjga_Ibodb-NW2kMaQ58qqISsPLhae_o/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Email": "={{ $json.body.email }}",
+            "Age ": "={{ $json.body.age }}",
+            "Name ": "={{ $json.body.name }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Name ",
+              "displayName": "Name ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Age ",
+              "displayName": "Age ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -240,
+        -128
+      ],
+      "id": "8ae0daf6-7d5e-4a0d-8222-6f4b2a179e98",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ggnropSjMBXne9vi",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "binaryPropertyName": "={{ $json.hdurl }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.nasa",
+      "typeVersion": 1,
+      "position": [
+        -32,
+        -128
+      ],
+      "id": "5096e6ce-1be6-477d-967c-0de482ef6939",
+      "name": "Get the astronomy picture of the day",
+      "credentials": {
+        "nasaApi": {
+          "id": "Ot1bXeBoSFYHPKof",
+          "name": "NASA account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Append row in sheet').item.json.Email }}",
+        "subject": "NASA Astronomy Picture of the Day 🚀",
+        "emailType": "text",
+        "message": "Here is today’s space image: ",
+        "options": {
+          "attachmentsUi": {
+            "attachmentsBinary": [
+              {
+                "property": "https://apod.nasa.gov/apod/image/2602/RosetteCalcagno.jpg"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        176,
+        -128
+      ],
+      "id": "0eec42b9-cc6d-4f71-b126-263c4dc7efc4",
+      "name": "Send a message",
+      "webhookId": "d31c56ae-75d5-4406-b677-b32ec6af8af0",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "pJDuGJRS0fm09oBK",
+          "name": "Gmail account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "yash-ninja.app.n8n.cloud",
+            "user-agent": "node",
+            "content-length": "174",
+            "accept": "*/*",
+            "accept-encoding": "gzip, br",
+            "accept-language": "*",
+            "cdn-loop": "cloudflare; loops=1; subreqs=1",
+            "cf-connecting-ip": "14.139.236.162",
+            "cf-ew-via": "15",
+            "cf-ipcountry": "IN",
+            "cf-ray": "9cdb9ca229a48b19-DEL",
+            "cf-visitor": "{\"scheme\":\"https\"}",
+            "cf-worker": "n8n.cloud",
+            "content-type": "application/json",
+            "sec-fetch-mode": "cors",
+            "x-forwarded-for": "14.139.236.162, 104.23.216.109",
+            "x-forwarded-host": "yash-ninja.app.n8n.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "traefik-prod-users-gwc-38-6f9f659dd9-jgqnt",
+            "x-is-trusted": "yes",
+            "x-real-ip": "14.139.236.162"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "name": "Suyash Prakash",
+            "age": 22,
+            "email": "ninjawiz266@gmail.com",
+            "interests": [],
+            "consent": true,
+            "timestamp": "2026-02-14T09:41:46.959Z",
+            "source": "lovable",
+            "doubleOptIn": false
+          },
+          "webhookUrl": "https://yash-ninja.app.n8n.cloud/webhook-test/af53988d-27ee-479b-a28d-3b6276496d46",
+          "executionMode": "test"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Get the astronomy picture of the day",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get the astronomy picture of the day": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "30df35b7-c288-477d-bc45-7eeba3ad16d3",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "f415d065ee6a41c866ab1211f6ac1fe2187a4c1a147ae7f89d7198b6e8b193de"
+  },
+  "id": "zfvMdVfX4oaWJZUrjwb6d",
+  "tags": []
+}
